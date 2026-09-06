@@ -1,0 +1,36 @@
+name: Backend CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "app/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "app/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Restore
+        run: dotnet restore SchoolPlatform.slnx
+
+      - name: Build
+        run: dotnet build SchoolPlatform.slnx --configuration Release --no-restore
+
+      - name: Docker build (API)
+        run: docker build -t school-api -f Dockerfile .
+        if: github.ref == 'refs/heads/main'

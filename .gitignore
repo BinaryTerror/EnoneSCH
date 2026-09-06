@@ -1,0 +1,53 @@
+# ── .NET ──────────────────────────────────────────────
+bin/
+obj/
+*.user
+*.suo
+*.userprefs
+*.tmp
+artifacts/
+publish/
+
+# Local development secrets (NEVER commit)
+app/src/School.Api/appsettings.Development.json
+
+# ── Node / Next.js ────────────────────────────────────
+node_modules/
+.next/
+out/
+.next-*
+npm-debug.log*
+
+# ── Environment / Secrets ─────────────────────────────
+.env
+.env.local
+.env.*.local
+!.env.example
+*.env
+
+# ── Neon CLI local context ────────────────────────────
+.neon/
+
+# ── Local agent tooling ───────────────────────────────
+.jarvis/
+
+# ── SQL seeds (demo data, no secrets) ─────────────────
+seed_*.sql
+!seed_all.sql
+!seed_lessons.sql
+
+# ── Local storage (dev videos) ────────────────────────
+uploads/
+*.mp4
+
+# ── OS / Editor ───────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# ── Logs ──────────────────────────────────────────────
+logs/
+*.log
+.neon

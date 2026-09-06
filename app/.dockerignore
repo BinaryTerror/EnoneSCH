@@ -1,0 +1,41 @@
+# Git
+.git
+.gitignore
+
+# Docker
+docker-compose*.yml
+Dockerfile*
+.dockerignore
+
+# IDE
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Build results
+**/bin/
+**/obj/
+**/out/
+
+# NuGet
+*.nupkg
+**/packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Uploads (local development)
+uploads/
+
+# README
+README.md
+LICENSE

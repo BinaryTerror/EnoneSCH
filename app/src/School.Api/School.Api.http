@@ -1,0 +1,37 @@
+@School.Api_HostAddress = http://localhost:5282
+
+### Health check
+GET {{School.Api_HostAddress}}/health
+Accept: application/json
+
+### Register
+POST {{School.Api_HostAddress}}/api/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Test User",
+  "email": "test@example.com",
+  "password": "password123"
+}
+
+### Login
+# @name login
+POST {{School.Api_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@school.com",
+  "password": "admin123"
+}
+
+### Me (usa o token do login acima)
+GET {{School.Api_HostAddress}}/api/auth/me
+Authorization: Bearer {{login.response.body.accessToken}}
+
+### Courses (autenticado)
+GET {{School.Api_HostAddress}}/api/courses
+Authorization: Bearer {{login.response.body.accessToken}}
+
+### Lessons de uma disciplina (substitui o GUID)
+GET {{School.Api_HostAddress}}/api/subjects/00000000-0000-0000-0000-000000000001/lessons
+Authorization: Bearer {{login.response.body.accessToken}}

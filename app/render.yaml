@@ -1,0 +1,45 @@
+# Render Blueprint for the School API
+# Docs: https://render.com/docs/blueprint-spec
+databases:
+  - name: school-db
+    plan: free
+    databaseName: school
+    user: school_user
+    region: frankfurt
+
+services:
+  - type: web
+    name: school-api
+    runtime: image
+    region: frankfurt
+    plan: free
+    image:
+      # Render builds directly from our Dockerfile at app/
+      context: app
+      dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+      - key: ASPNETCORE_URLS
+        value: http://+:8080
+      - key: DATABASE_CONNECTION_STRING
+        fromDatabase:
+          name: school-db
+          property: connectionString
+      - key: JWT_SECRET
+        sync: false  # set in Render dashboard
+      - key: JWT_ISSUER
+        sync: false
+      - key: JWT_AUDIENCE
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false  # e.g. https://school.example.com,https://your-app.vercel.app
+      - key: STORAGE_ENDPOINT
+        sync: false  # e.g. https://<account-id>.r2.cloudflarestorage.com
+      - key: STORAGE_ACCESS_KEY
+        sync: false
+      - key: STORAGE_SECRET_KEY
+        sync: false
+      - key: STORAGE_BUCKET
+        sync: false

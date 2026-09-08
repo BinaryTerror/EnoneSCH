@@ -51,3 +51,7 @@ Thumbs.db
 logs/
 *.log
 .neon
+
+# GitHub CLI local install
+gh-cli/
+gh.zip
